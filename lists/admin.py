@@ -4,4 +4,11 @@ from . import models
 
 @admin.register(models.List)
 class AdminList(admin.ModelAdmin):
-    pass
+
+    list_display = (
+        "name",
+        "user",
+        "product_count",
+    )
+
+    filter_horizontal = ("product",)

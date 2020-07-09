@@ -6,5 +6,5 @@ from . import models
 class UserAdmin(admin.ModelAdmin):
     """Custom Admin User"""
 
-    list_display = ("username", "birthday", "id_checked", "address")
+    list_display = ("username", "birthday", "id_checked", "address", "buyer_average")
     list_filter = ("id_checked",)

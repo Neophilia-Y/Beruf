@@ -1,5 +1,6 @@
 from django.db import models
 from core import models as core_models
+from django.utils import timezone
 
 
 class Reservation(core_models.TimeStampedModel):
@@ -24,3 +25,7 @@ class Reservation(core_models.TimeStampedModel):
 
     def __str__(self):
         return f"{self.product} - {self.appointment}"
+
+    def left_days(self):
+        now = timezone.now().date()
+        return str(self.appointment - now).split()[0]

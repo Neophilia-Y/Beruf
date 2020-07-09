@@ -21,6 +21,16 @@ class Review(core_models.TimeStampedModel):
     def __str__(self):
         return f"buyer:{self.buyer} seller:{self.seller}"
 
+    def rating_average(self):
+        avg = (
+            self.accuracy
+            + self.communication
+            + self.manner
+            + self.quality
+            + self.appointment
+        ) / 5
+        return round(avg, 2)
+
 
 class Comment(core_models.TimeStampedModel):
     """Comment Model Definition"""

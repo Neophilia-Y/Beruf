@@ -7,6 +7,18 @@ class User(AbstractUser):
 
     address = models.CharField(max_length=50)
     about_me = models.TextField(default="")
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     id_checked = models.BooleanField(default=False)
     birthday = models.DateField(null=True)
+
+    def buyer_average(self):
+        reviews = self.seller.all()
+        if len(reviews) == 0:
+            return 0
+        else:
+            total = 0
+            for review in reviews:
+                total += review.rating_average()
+            return round(total / len(reviews), 2)
+
+    buyer_average.short_description = "AVG"

@@ -5,4 +5,4 @@ from . import models
 @admin.register(models.Reservation)
 class AdminReservation(admin.ModelAdmin):
 
-    pass
+    list_display = ("product", "status", "appointment", "left_days")

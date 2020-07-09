@@ -35,7 +35,7 @@ class Photo(core_models.TimeStampedModel):
     """Product Photo Model"""
 
     caption = models.CharField(max_length=50)
-    files = models.ImageField()
+    files = models.ImageField(upload_to="product_photos")
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -54,3 +54,8 @@ class Product(core_models.TimeStampedModel):
 
     def __str__(self):
         return f"{self.host}'s product"
+
+    def save(self, *args, **kwargs):
+        self.title = str.capitalize(self.title)
+        super().save(*args, **kwargs)  # Call the real save() method
+
