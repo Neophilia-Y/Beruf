@@ -4,4 +4,14 @@
     {% for product in products %}
        <h2> {{product.title}} | Price: {{product.price}}Won</h2>
     {% endfor %}
+
+    <h5>
+    {% if page|add:-1 != 0 %}
+        <a href="?page={{page|add:-1}}">Previous</a>
+    {% endif %} 
+    Page: {{page}} of {{page_count}}
+    {% if page < page_count %}
+    <a href="?page={{page|add:1}}">Next</a>
+    {% endif %}
+    </h5>
 {% endblock content %}
