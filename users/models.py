@@ -12,13 +12,13 @@ class User(AbstractUser):
     birthday = models.DateField(null=True)
 
     def buyer_average(self):
-        reviews = self.seller.all()
-        if len(reviews) == 0:
+        seller_reviews = self.seller.all()
+        if len(seller_reviews) == 0:
             return 0
         else:
             total = 0
-            for review in reviews:
+            for review in seller_reviews:
                 total += review.rating_average()
-            return round(total / len(reviews), 2)
+            return round(total / len(seller_reviews), 2)
 
     buyer_average.short_description = "AVG"

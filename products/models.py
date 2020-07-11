@@ -58,4 +58,3 @@ class Product(core_models.TimeStampedModel):
     def save(self, *args, **kwargs):
         self.title = str.capitalize(self.title)
         super().save(*args, **kwargs)  # Call the real save() method
-
