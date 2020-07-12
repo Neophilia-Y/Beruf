@@ -1,6 +1,7 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from . import models
 from django.utils import timezone
+from django.shortcuts import render
 
 
 class HomeView(ListView):
@@ -17,3 +18,9 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         context["now"] = timezone.now()
         return context
+
+
+class ProductDetail(DetailView):
+    """Product DetailView class"""
+
+    model = models.Product

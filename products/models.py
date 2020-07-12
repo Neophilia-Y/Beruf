@@ -1,6 +1,7 @@
 from django.db import models
 from users import models as user_models
 from core import models as core_models
+from django.urls import reverse
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -58,3 +59,6 @@ class Product(core_models.TimeStampedModel):
     def save(self, *args, **kwargs):
         self.title = str.capitalize(self.title)
         super().save(*args, **kwargs)  # Call the real save() method
+
+    def get_absolute_url(self):
+        return reverse("product:detail", kwargs={"pk": self.pk})
