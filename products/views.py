@@ -1,18 +1,19 @@
-from math import ceil
-from django.shortcuts import render
+from django.views.generic import ListView
 from . import models
+from django.utils import timezone
 
 
-def all_products(request):
-    page = request.GET.get("page", 1)
-    page = int(page or 1)
-    page_size = 4
-    limit = page_size * page
-    offset = limit - page_size
-    products = models.Product.objects.all()[offset:limit]
-    page_count = ceil(models.Product.objects.count() / page_size)
-    return render(
-        request,
-        template_name="product/home.html",
-        context={"products": products, "page_count": page_count, "page": page},
-    )
+class HomeView(ListView):
+
+    """Home View class"""
+
+    model = models.Product
+    context_object_name = "products"
+    page_kwarg = "page"
+    paginate_by = 10
+    paginate_orphans = 4
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["now"] = timezone.now()
+        return context
