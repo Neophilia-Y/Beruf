@@ -8,7 +8,17 @@
 </head>
 
 <body>
-    {% include "partials/header.html" %}
+    <header>
+        {% include "partials/nav.html" %}
+        {% block search-bar %}
+        <form method="GET" action="{% url "product:search" %}">
+            <div>
+                <label for=title>Search</label>
+                <input name="title" id="title" type="text" placeholder="Search by Title">
+            </div>
+        </form>
+        {% endblock search-bar %}
+    </header>
     {% block content %}
 
     {% endblock content%}

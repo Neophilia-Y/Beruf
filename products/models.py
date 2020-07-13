@@ -61,4 +61,4 @@ class Product(core_models.TimeStampedModel):
         super().save(*args, **kwargs)  # Call the real save() method
 
     def get_absolute_url(self):
-        return reverse("product:detail", kwargs={"pk": self.pk})
+        return reverse("product:detail", kwargs={"pk": pk})

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block search-bar %}
+        <form method="GET" action="{% url "product:search" %}">
+            {{form.as_p}}
+            <button>Search</button>
+        </form>
+
+{% endblock search-bar %}
+
+{% block content %}
+    <h2>{{products.count}} Search Result </h2>
+    {% for product in products %}
+        <h5>{{product.title}}</h5>
+    {% endfor %}
+{% endblock content %}
